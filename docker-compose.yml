@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  nginx:
+    image: 'nginx:1.16'
+    ports:
+      - '80:88'
+      - '443:443'
+    volumes:
+      - './Projeto:/usr/share/nginx/html'
+      - './config/config.conf:/etc/nginx/conf.d/config.conf'
+    networks:
+      - netTest
+  php:
+    image: 'php:fpm'
+    ports:
+      - '9000:9000'
+    volumes:
+      - './Projeto:/usr/share/nginx/html'
+    networks:
+      - netTest
+networks:
+  netTest:
+    driver: bridge
